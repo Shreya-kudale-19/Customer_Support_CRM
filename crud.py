@@ -8,7 +8,6 @@ import schemas
 
 def generate_next_ticket_id(db: Session) -> str:
     """
-    Generates a unique, sequential ticket ID (e.g., TKT-001, TKT-002).
     This queries the database for the maximum internal integer ID and increments it,
     which is robust against deletes (prevents generating duplicate IDs).
     """
@@ -47,7 +46,7 @@ def get_tickets(db: Session, status: Optional[str] = None, search: Optional[str]
 
 def get_ticket_by_ticket_id(db: Session, ticket_id: str) -> Optional[models.Ticket]:
     """
-    Retrieves a single ticket by its string business ID (e.g., TKT-005).
+    Retrieves a single ticket by its string business ID.
     """
     return db.query(models.Ticket).filter(models.Ticket.ticket_id == ticket_id).first()
 
