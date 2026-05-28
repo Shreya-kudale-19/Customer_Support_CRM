@@ -14,7 +14,7 @@ import crud
 from database import engine, get_db
 
 # Create all database tables on startup. 
-# Note: In production systems, migration tools like Alembic are preferred.
+# Note: In production systems,  migration tools like Alembic are preferred.
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -39,7 +39,6 @@ app.add_middleware(
 def create_new_ticket(ticket_in: schemas.TicketCreate, db: Session = Depends(get_db)):
     """
     Creates a new support ticket in the CRM.
-    Returns the auto-generated ticket ID (e.g. TKT-001) and creation timestamp.
     """
     db_ticket = crud.create_ticket(db, ticket_in)
     return db_ticket
@@ -90,7 +89,7 @@ def update_ticket_status_and_notes(
     crud.update_ticket(db, db_ticket, ticket_update)
     return {
         "success": True,
-        "updated_at": datetime()
+        "updated_at": datetime.utcnow()
     }
 
 
