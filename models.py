@@ -21,8 +21,8 @@ class Ticket(Base):
     status = Column(String, default="Open", nullable=False)
     
     # Timestamps for tracking ticket lifecycle
-    created_at = Column(DateTime, default=datetime, nullable=False)
-    updated_at = Column(DateTime, default=datetime, onupdate=datetime, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
     # Establish one-to-many relationship with the Note table.
     # cascade="all, delete-orphan" ensures notes are deleted if their ticket is deleted.
@@ -38,7 +38,7 @@ class Note(Base):
     ticket_id = Column(String, ForeignKey("tickets.ticket_id"), nullable=False)
     
     note_text = Column(String, nullable=False)
-    created_at = Column(DateTime, default=datetime, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     # Back-reference relationship to the Ticket class
     ticket = relationship("Ticket", back_populates="notes")
