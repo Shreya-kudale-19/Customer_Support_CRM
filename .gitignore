@@ -1,0 +1,15 @@
+# Python virtual environments
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Local databases
+sqlite.db
+sqlite.db-journal
+
+# IDE logs and configuration
+.vscode/
+.idea/
+.DS_Store
